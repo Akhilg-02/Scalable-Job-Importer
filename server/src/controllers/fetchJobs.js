@@ -1,6 +1,7 @@
 const axios = require('axios');
 const xml2js = require('xml2js');
 const { Queue } = require('bullmq');
+const ImportLog = require('../models/importLogModel')
 
 const redisConfig = {
     connection: {
@@ -41,7 +42,26 @@ const fetchJobsFromFeed = async (url) => {
         return { total: jobs.length };
     } catch (error) {
         console.error(`Error fetching from ${url}`, error.message);
-        return { total: 0 };
+
+        await ImportLog.create({
+            fileName: url,
+            total: 0,
+            new: 0,
+            updated: 0,
+            failed: 1,
+            failedJobs: [
+                {
+                    guid: 'N/A',
+                    reason: error.message
+                }
+            ],
+            importedAt: new Date()
+        });
+        
+        return { 
+            total: 0,
+            error: error.message
+         };
     }
 }
 
