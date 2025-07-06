@@ -1,6 +1,4 @@
-# README.md
-
-## Project Overview
+# Project Overview
 
 This project is a Job Importer System with:
 
