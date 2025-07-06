@@ -3,14 +3,14 @@ import { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from "@mui/material";
 
-const apiUrl = import.meta.env.VITE_API_URL // || http://localhost:8000
+const apiUrl = import.meta.env.VITE_API_URL  // || "http://localhost:8000" 
 
 
 const columns = [
     { id: "fileName", label: "File Name (URL)", minWidth: 200 },
     {
         id: "importDateTime",
-        label: "Imported At",
+        label: "importDateTime",
         minWidth: 170,
         format: (value) =>
             new Date(value).toLocaleString("en-GB", {
@@ -69,6 +69,7 @@ const ImportLogs = () => {
                                         key={col.id}
                                         style={{ minWidth: col.minWidth }}
                                         align={col.align || "left"}
+                                        sx={{backgroundColor:"#E8E8E8"}}
                                     >
                                         {col.label}
                                     </TableCell>
