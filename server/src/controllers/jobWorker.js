@@ -76,20 +76,13 @@ const worker = new Worker('job-import-queue', async job => {
 
 // Log results only once after all jobs in the queue are processed
 worker.on('drained', async () => {
-    console.log("📦 Queue drained — writing import logs...");
+    console.log("Queue drained — writing import logs...");
 
     for (const log of Object.values(importStats)) {
-        log.importedAt = new Date(); // Optional timestamp for frontend use
+        log.importedAt = new Date(); 
         await ImportLog.create(log);
     }
 
     importStats = {};
-    console.log("✅ All logs saved.");
+    console.log("All logs saved.");
 });
-
-// worker.on('completed', async () => {
-//     for (const log of Object.values(importStats)) {
-//         await ImportLog.create(log);
-//     }
-//     importStats = {};
-// })

@@ -38,12 +38,12 @@ const feedUrls = [
 
 // Cron Job - runs every 1 hour '0 * * * *'
 // */3 * * * *
-cron.schedule('*/100 * * * *', async()=>{
-  console.log('⏰ Cron running every 1 hour');
+cron.schedule('0 0 * * *', async()=>{
+  console.log('Cron running every 1 hour');
   console.log('Starting cron job import\n');
 
     for (const url of feedUrls) {
-    console.log(`Fetching from: ${url}`);
+    //console.log(`Fetching from: ${url}`);
     const { total } = await fetchJobsFromFeed(url);
     console.log(`Jobs fetched from ${url}: ${total}`);
   }
