@@ -6,7 +6,7 @@ const connectDB = require('./config/db');
 const cron = require('node-cron');
 const importLogRoute = require('./routes/importLogsRoute');
 const { fetchJobsFromFeed } = require('./controllers/fetchJobs');
-const feedUrls = require('./config/feedUrls')
+const {feedUrls} = require('./config/feedUrls')
 
 const app = express();
 app.use(cors())
@@ -25,9 +25,10 @@ connectDB().then(() => {
 });
 
 
-// Cron Job - runs every 1 hour '0 * * * *'
-// */3 * * * *
-cron.schedule('0 0 * * *', async()=>{
+
+// Cron Job - runs every 1 hour '0 * * * *'; 0 0 * * * (24 hours);  */3 * * * * (3 min)
+
+cron.schedule('0 * * * *', async()=>{
   console.log('Cron running every 1 hour');
   console.log('Starting cron job import\n');
 
