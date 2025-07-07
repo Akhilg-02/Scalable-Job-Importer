@@ -26,9 +26,9 @@ connectDB().then(() => {
 
 
 
-// Cron Job - runs every 1 hour '0 * * * *'; 0 0 * * * (24 hours);  */3 * * * * (3 min)
+// Cron Job - runs every 1 hour '0 * * * *'
 
-cron.schedule('0 * * * *', async()=>{
+cron.schedule('0 0 * * *', async()=>{
   console.log('Cron running every 1 hour');
   console.log('Starting cron job import\n');
 
